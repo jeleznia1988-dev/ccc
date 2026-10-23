@@ -17,6 +17,7 @@ jobs:
           ROOT=$(dirname "$(find "$RUNNER_TEMP/src" -maxdepth 3 -path '*android/build-android.sh' | head -n1)")/..
           cd "$ROOT"
           pwd
+          sed -i '/^find "\$W\/out"/d' android/build-android.sh
           ABI=armeabi-v7a bash android/build-android.sh
           cp inputstream.adaptive-21.5.99-android-armeabi-v7a.zip "$GITHUB_WORKSPACE/"
       - uses: actions/upload-artifact@v4
